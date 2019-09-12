@@ -1,5 +1,7 @@
 const mongoose = require("mongoose"); // Erase if already required
+const moment = require("moment");
 
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 // Declare the Schema of the Mongo model
 let userSchema = new mongoose.Schema({
   full_name: {
@@ -46,6 +48,11 @@ let userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["Lost", "Found", "Admin"]
+  },
+  isActive: Boolean,
+  createdAt: {
+    type: String,
+    default: DateTime
   }
 });
 

@@ -1,14 +1,17 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const mongoose = require("mongoose");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users.route");
-
-var app = express();
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/user.route");
+const carRouter = require("./routes/car.route");
+const bikeRouter = require("./routes/bike.route");
+const laptopRouter = require("./routes/laptop.model");
+const phoneRouter = require("./routes/phone.route");
+const app = express();
 
 //mongoose connect
 mongoose.connect(
@@ -31,8 +34,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Routes
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", usersRouter);
+app.use("/car", carRouter);
+app.use("/bike", bikeRouter);
+app.use("/laptop", laptopRouter);
+app.use("/phone", phoneRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

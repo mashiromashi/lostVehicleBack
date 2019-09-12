@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
+
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 //Declare the Schema of The Mongo model
 const carSchema = new mongoose.Schema({
@@ -7,11 +10,11 @@ const carSchema = new mongoose.Schema({
     required: true,
     index: true
   },
-  contact_number: {
+  contactNumber: {
     type: Number,
     required: true
   },
-  license_plate: {
+  licensePlate: {
     type: String,
     unique: true,
     required: true
@@ -24,8 +27,13 @@ const carSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  manfactured_year: Number,
-  engine_number: String
+  manfacturedYear: Number,
+  engineNumber: String,
+  isActive: String,
+  createdAt: {
+    type: String,
+    default: DateTime
+  }
 });
 
 const carModel = mongoose.model("Car", carSchema, "Car");

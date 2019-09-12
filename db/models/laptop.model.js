@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
+
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 //Declare the schema of the mongo model
 const laptopSchema = new mongoose.Schema({
@@ -8,11 +11,11 @@ const laptopSchema = new mongoose.Schema({
     unique: true,
     index: true
   },
-  contact_number: {
+  contactNumber: {
     type: Number,
     required: true
   },
-  serial_number: {
+  serialNumber: {
     type: String,
     unique: true,
     required: true
@@ -24,6 +27,11 @@ const laptopSchema = new mongoose.Schema({
   model: {
     type: String,
     required: true
+  },
+  isActive: Boolean,
+  createdAt: {
+    type: String,
+    default: DateTime
   }
 });
 
