@@ -23,4 +23,15 @@ app.get("/register", async (req, res, next) => {
   }
 });
 
+//User Login module
+app.get("/login", async (req, res, next) => {
+  const loginUser = await userModel.findOne(req.body);
+  try {
+    if (res.status === 200) {
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = app;

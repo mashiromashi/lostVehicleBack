@@ -37,7 +37,7 @@ const tuktukSchema = new mongoose.Schema({
   }
 });
 
-const tuktukModel = mongoose.model("Tuk Tuk", tuktukModel, " Tuk Tuk");
+const tuktukModel = mongoose.model("Tuk Tuk", tuktukSchema, " Tuk Tuk");
 
 //Export the model
 module.exports = tuktukModel;

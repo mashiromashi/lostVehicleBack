@@ -1,5 +1,5 @@
 const express = require("express");
-const app = expres();
+const app = express();
 const tuktukModel = require("../db/models/tuktuk.model");
 
 //Get all the lost tuk tuks in the databased

@@ -11,6 +11,7 @@ const carRouter = require("./routes/car.route");
 const bikeRouter = require("./routes/bike.route");
 const laptopRouter = require("./routes/laptop.model");
 const phoneRouter = require("./routes/phone.route");
+const tuktukRouter = require("./routes/tuktuk.route");
 const app = express();
 
 //mongoose connect
@@ -41,6 +42,7 @@ app.use("/car", carRouter);
 app.use("/bike", bikeRouter);
 app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
+app.use("/tuktuk", tuktukRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
