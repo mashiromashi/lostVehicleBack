@@ -13,7 +13,8 @@ const bikeSchema = new mongoose.Schema({
   postID: {
     type: Number,
     required: true,
-    index: true
+    index: true,
+    unique: true
   },
   contactNumber: {
     type: Number,

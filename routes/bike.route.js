@@ -34,8 +34,7 @@ app.post("/update", async (req, res) => {
 
   try {
     if (updateBike) {
-      res.send(updateBike);
-      res.send("ok");
+      res.status(200).json(updateBike);
     }
   } catch (err) {
     res.status(500).send(err);
