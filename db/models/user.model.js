@@ -1,10 +1,16 @@
 const mongoose = require("mongoose"); // Erase if already required
 const moment = require("moment");
+const autoIncrement = require("mongoose-auto-increment");
 
 const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
+
 // Declare the Schema of the Mongo model
 let userSchema = new mongoose.Schema({
-  full_name: {
+  userID: {
+    type: Number,
+    default: 0
+  },
+  fullName: {
     type: String,
     required: true,
     index: true
@@ -26,6 +32,11 @@ let userSchema = new mongoose.Schema({
     required: true,
     index: true
   },
+  confirmPassword: {
+    type: String,
+    required: true,
+    index: true
+  },
   township: {
     type: String,
     index: true,
@@ -38,8 +49,7 @@ let userSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    index: true,
-    required: true
+    index: true
   },
   lostItem: {
     type: String,

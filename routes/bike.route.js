@@ -13,11 +13,30 @@ app.get("/getall", async (req, res, next) => {
 });
 
 //Adding the lost bike into the database
-app.get("/add", async (req, res, next) => {
+app.post("/add", async (req, res) => {
   const addBike = new bikeModel(req.body);
   try {
     await addBike.save();
-    res.send(addBike, "Bike successfully added to the database");
+    res.send(addBike);
+    res.send("Bike successfully added to the database");
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//update module the lost bike if found
+app.post("/update", async (req, res) => {
+  const filter = { postID: req.body.postID };
+  const update = { isActive: req.body.isActive };
+  const updateBike = await bikeModel.findOneAndUpdate(filter, update, {
+    new: true
+  });
+
+  try {
+    if (updateBike) {
+      res.send(updateBike);
+      res.send("ok");
+    }
   } catch (err) {
     res.status(500).send(err);
   }

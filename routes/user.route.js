@@ -13,21 +13,64 @@ app.get("/getall", async (req, res, next) => {
 });
 
 //Register new user
-app.get("/register", async (req, res, next) => {
+app.post("/register", async (req, res) => {
   const user = new userModel(req.body);
   try {
     await user.save();
-    res.send(user, "User Successfully Registered");
+    res.status(200).send("User Successfully Registered");
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
 //User Login module
-app.get("/login", async (req, res, next) => {
-  const loginUser = await userModel.findOne(req.body);
+app.get("/login", async (req, res) => {
+  const loginUser = await userModel.findOne({
+    email: req.body.email,
+    password: req.body.password
+  });
   try {
-    if (res.status === 200) {
+    if (loginUser) {
+      res.send(loginUser.isActive);
+      res.send(loginUser.role);
+      res.send("Successfully Logged In");
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//User update module for Admin
+app.post("/update", async (req, res) => {
+  const filter = { email: req.body.email };
+  const update = { role: req.body.role };
+  const updateUser = await userModel.findOneAndUpdate(filter, update, {
+    new: true
+  });
+  try {
+    if (updateUser && req.body.role === "Admin") {
+      console.log(res.statusCode);
+      res.send(updateUser);
+      res.send("User updated successfully");
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//User delete module for Admin (not actually delete just to make it inactive and hide from the frontend)
+app.post("/delete", async (req, res) => {
+  const filter = { email: req.body.email };
+  const update = { isActive: req.body.isActive };
+
+  const deleteUser = await userModel.findOneAndUpdate(filter, update, {
+    new: true
+  });
+
+  try {
+    if (deleteUser && req.body.role === "Admin") {
+      res.send("User Deleted Successfully");
+      res.send(deleteUser);
     }
   } catch (err) {
     res.status(500).send(err);

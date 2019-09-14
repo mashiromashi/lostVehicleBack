@@ -5,10 +5,14 @@ const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 //Declare the schema of the mongo model
 const bikeSchema = new mongoose.Schema({
-  id: {
+  userId: {
     type: Number,
     required: true,
-    unique: true,
+    index: true
+  },
+  postID: {
+    type: Number,
+    required: true,
     index: true
   },
   contactNumber: {
@@ -34,7 +38,8 @@ const bikeSchema = new mongoose.Schema({
   createdAt: {
     type: String,
     default: DateTime
-  }
+  },
+  imagePath: String
 });
 
 const bikeModel = mongoose.model("Bike", bikeSchema, "Bike");
