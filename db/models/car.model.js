@@ -47,7 +47,8 @@ const carSchema = new mongoose.Schema({
   modifiedBy: {
     type: String
   },
-  imagePath: String
+  imagePath: String,
+  remark: String
 });
 
 const carModel = mongoose.model("Car", carSchema, "Car");

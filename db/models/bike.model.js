@@ -40,7 +40,8 @@ const bikeSchema = new mongoose.Schema({
     type: String,
     default: DateTime
   },
-  imagePath: String
+  imagePath: String,
+  remark: String
 });
 
 const bikeModel = mongoose.model("Bike", bikeSchema, "Bike");
