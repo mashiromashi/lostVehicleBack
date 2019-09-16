@@ -31,9 +31,10 @@ app.get("/login", async (req, res) => {
   });
   try {
     if (loginUser) {
-      res.send(loginUser.isActive);
-      res.send(loginUser.role);
-      res.send("Successfully Logged In");
+      console.log("logged in");
+      res
+        .status(200)
+        .json({ isActive: loginUser.isActive, role: loginUser.role });
     }
   } catch (err) {
     res.status(500).send(err);

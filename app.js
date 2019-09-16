@@ -1,16 +1,11 @@
+//variable initialization
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/user.route");
-const carRouter = require("./routes/car.route");
-const bikeRouter = require("./routes/bike.route");
-const laptopRouter = require("./routes/laptop.model");
-const phoneRouter = require("./routes/phone.route");
-const tuktukRouter = require("./routes/tuktuk.route");
+
 const app = express();
 
 //mongoose connect
@@ -35,6 +30,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //Routes
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/user.route");
+const carRouter = require("./routes/car.route");
+const bikeRouter = require("./routes/bike.route");
+const laptopRouter = require("./routes/laptop.route");
+const phoneRouter = require("./routes/phone.route");
+const tuktukRouter = require("./routes/tuktuk.route");
+const landingRouter = require("./routes/landing.route");
+
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/car", carRouter);
@@ -42,6 +46,7 @@ app.use("/bike", bikeRouter);
 app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
 app.use("/tuktuk", tuktukRouter);
+app.use("/landingsearch/:licenseplate", landingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
