@@ -46,7 +46,7 @@ app.use("/bike", bikeRouter);
 app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
 app.use("/tuktuk", tuktukRouter);
-app.use("/landingsearch/:licenseplate", landingRouter);
+app.use("/landingsearch", landingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -18,7 +18,6 @@ app.post("/add", async (req, res, next) => {
   try {
     await addCar.save();
     res.send(addCar);
-    res.send("Car added Successfully");
   } catch (err) {
     res.status(500).send(err);
   }

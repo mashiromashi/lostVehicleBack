@@ -14,7 +14,7 @@ app.get("/getall", async (req, res, next) => {
 
 //Adding the lost laptop into the database
 app.get("/add", async (req, res, next) => {
-  const addLaptop = new laptopModel(req.body);
+  const addLaptop = await laptopModel(req.body);
   try {
     await addLaptop.save();
     res.send(addLaptop, "Laptop Successfully added to the database");

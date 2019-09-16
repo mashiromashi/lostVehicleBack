@@ -20,10 +20,14 @@ const bikeSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  licensePlate: {
+  licensePlateAlphabet: {
     type: String,
-    unique: true,
     required: true
+  },
+  licensePlateNumber: {
+    type: String,
+    required: true,
+    unique: true
   },
   brand: {
     type: String,

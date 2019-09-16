@@ -18,7 +18,6 @@ app.post("/add", async (req, res) => {
   try {
     await addBike.save();
     res.send(addBike);
-    res.send("Bike successfully added to the database");
   } catch (err) {
     res.status(500).send(err);
   }
