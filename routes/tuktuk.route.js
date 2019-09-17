@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const tuktukModel = require("../db/models/tuktuk.model");
+const TukTukModel = require('../db/models/tuktuk.model');
 
-//Get all the lost tuk tuks in the databased
-app.get("/getall", async (req, res, next) => {
-  const getAllTukTuks = await tuktukModel.find({});
+// Get all the lost tuk tuks in the databased
+app.get('/getall', async (req, res, next) => {
+  const getAllTukTuks = await TukTukModel.find({});
   try {
     res.send(getAllTukTuks);
   } catch (err) {
@@ -12,12 +12,12 @@ app.get("/getall", async (req, res, next) => {
   }
 });
 
-//Adding the lost tuktuk into the database
-app.get("/add", async (req, res, next) => {
-  const addTukTuk = new tuktukModel(req.body);
+// Adding the lost tuktuk into the database
+app.get('/add', async (req, res, next) => {
+  const addTukTuk = new TukTukModel(req.body);
   try {
-    await tuktukModel.save();
-    res.send(addTukTuk, "Tuk Tuk Successfully added to the database");
+    await TukTukModel.save();
+    res.send(addTukTuk, 'Tuk Tuk Successfully added to the database');
   } catch (err) {
     res.status(500).send(err);
   }

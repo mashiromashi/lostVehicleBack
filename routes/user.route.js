@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const userModel = require("../db/models/user.model");
+const UserModel = require('../db/models/user.model');
 
-//Get all user list for admin
-app.get("/getall", async (req, res, next) => {
+// Get all user list for admin
+app.get('/getall', async (req, res, next) => {
   const getAllUser = await userModel.find({});
   try {
     res.send(getAllUser);
@@ -12,65 +12,66 @@ app.get("/getall", async (req, res, next) => {
   }
 });
 
-//Register new user
-app.post("/register", async (req, res) => {
-  const user = new userModel(req.body);
+// Register new user
+app.post('/register', async (req, res) => {
+  const user = new UserModel(req.body);
   try {
     await user.save();
-    res.status(200).send("User Successfully Registered");
+    res.status(200).send('User Successfully Registered');
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-//User Login module
-app.get("/login", async (req, res) => {
+// User Login module
+app.get('/login', async (req, res) => {
   const loginUser = await userModel.findOne({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   });
   try {
     if (loginUser) {
-      console.log("logged in");
+      console.log('logged in');
       res
-        .status(200)
-        .json({ isActive: loginUser.isActive, role: loginUser.role });
+          .status(200)
+          .json({isActive: loginUser.isActive, role: loginUser.role});
     }
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-//User update module for Admin
-app.post("/update", async (req, res) => {
-  const filter = { email: req.body.email };
-  const update = { role: req.body.role };
+// User update module for Admin
+app.post('/update', async (req, res) => {
+  const filter = {email: req.body.email};
+  const update = {role: req.body.role};
   const updateUser = await userModel.findOneAndUpdate(filter, update, {
-    new: true
+    new: true,
   });
   try {
-    if (updateUser && req.body.role === "Admin") {
+    if (updateUser && req.body.role === 'Admin') {
       console.log(res.statusCode);
       res.send(updateUser);
-      res.send("User updated successfully");
+      res.send('User updated successfully');
     }
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-//User delete module for Admin (not actually delete just to make it inactive and hide from the frontend)
-app.post("/delete", async (req, res) => {
-  const filter = { email: req.body.email };
-  const update = { isActive: req.body.isActive };
+// User delete module for Admin
+// (not actually delete just to make it inactive and hide from the frontend)
+app.post('/delete', async (req, res) => {
+  const filter = {email: req.body.email};
+  const update = {isActive: req.body.isActive};
 
   const deleteUser = await userModel.findOneAndUpdate(filter, update, {
-    new: true
+    new: true,
   });
 
   try {
-    if (deleteUser && req.body.role === "Admin") {
-      res.send("User Deleted Successfully");
+    if (deleteUser && req.body.role === 'Admin') {
+      res.send('User Deleted Successfully');
       res.send(deleteUser);
     }
   } catch (err) {

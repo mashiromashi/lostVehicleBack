@@ -5,6 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
 
@@ -23,6 +24,7 @@ db.once("open", function() {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -37,7 +39,7 @@ const bikeRouter = require("./routes/bike.route");
 const laptopRouter = require("./routes/laptop.route");
 const phoneRouter = require("./routes/phone.route");
 const tuktukRouter = require("./routes/tuktuk.route");
-const landingRouter = require("./routes/landing.route");
+const searchRouter = require("./routes/search.route");
 
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
@@ -46,7 +48,7 @@ app.use("/bike", bikeRouter);
 app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
 app.use("/tuktuk", tuktukRouter);
-app.use("/landingsearch", landingRouter);
+app.use("/search", searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
