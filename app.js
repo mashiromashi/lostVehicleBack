@@ -1,4 +1,4 @@
-//variable initialization
+// variable initialization
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -9,12 +9,12 @@ const cors = require("cors");
 
 const app = express();
 
-//mongoose connect
+// mongoose connect
 mongoose.connect(
   "mongodb+srv://admin:admin@cluster0-iz4np.gcp.mongodb.net/LostAndFound?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true },
 );
-let db = mongoose.connection;
+const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error"));
 db.once("open", function() {
   console.log("LETS GO");
@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-//Routes
+// Routes
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/user.route");
 const carRouter = require("./routes/car.route");
@@ -40,6 +40,7 @@ const laptopRouter = require("./routes/laptop.route");
 const phoneRouter = require("./routes/phone.route");
 const tuktukRouter = require("./routes/tuktuk.route");
 const searchRouter = require("./routes/search.route");
+const imageUploadRouter = require("./routes/imageUpload.route");
 
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
@@ -49,6 +50,7 @@ app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
 app.use("/tuktuk", tuktukRouter);
 app.use("/search", searchRouter);
+app.use("/imageupload", imageUploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

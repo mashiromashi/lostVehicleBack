@@ -1,19 +1,21 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const BikeModel = require('../db/models/bike.model');
+const BikeModel = require("../db/models/bike.model");
 
 // get all bike list for the admin
-app.get('/getall', async (req, res, next) => {
+app.get("/getall", async (req, res, next) => {
   const getAllBike = await BikeModel.find({});
   try {
-    res.send(getAllBike);
+    if (req.header.role === "Admin") {
+      res.send(getAllBike);
+    }
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
 // Adding the lost bike into the database
-app.post('/add', async (req, res) => {
+app.post("/add", async (req, res) => {
   const addBike = new BikeModel(req.body);
   try {
     await addBike.save();
@@ -24,9 +26,9 @@ app.post('/add', async (req, res) => {
 });
 
 // update module the lost bike if found
-app.post('/update', async (req, res) => {
-  const filter = {postID: req.body.postID};
-  const update = {isActive: req.body.isActive};
+app.post("/update", async (req, res) => {
+  const filter = { postID: req.body.postID };
+  const update = { isActive: req.body.isActive };
   const updateBike = await BikeModel.findOneAndUpdate(filter, update, {
     new: true,
   });

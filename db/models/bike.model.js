@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
-const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the schema of the mongo model
 const bikeSchema = new mongoose.Schema({
@@ -10,7 +10,7 @@ const bikeSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
-  postID: {
+  postId: {
     type: Number,
     required: true,
     index: true,
@@ -41,9 +41,12 @@ const bikeSchema = new mongoose.Schema({
   },
   imagePath: String,
   remark: String,
+  foundDate: {
+    type: String,
+  },
 });
 
-const bikeModel = mongoose.model('Bike', bikeSchema, 'Bike');
+const bikeModel = mongoose.model("Bike", bikeSchema, "Bike");
 
 // Export the model
 module.exports = bikeModel;

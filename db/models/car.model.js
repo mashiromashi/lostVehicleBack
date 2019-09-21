@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
-const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the Schema of The Mongo model
 const carSchema = new mongoose.Schema({
@@ -49,9 +49,12 @@ const carSchema = new mongoose.Schema({
   },
   imagePath: String,
   remark: String,
+  foundDate: {
+    type: String,
+  },
 });
 
-const carModel = mongoose.model('Car', carSchema, 'Car');
+const carModel = mongoose.model("Car", carSchema, "Car");
 
 // Export the model
 module.exports = carModel;

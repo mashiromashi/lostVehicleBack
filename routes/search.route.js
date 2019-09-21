@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const carModel = require('../db/models/car.model');
-const bikeModel = require('../db/models/bike.model');
+const carModel = require("../db/models/car.model");
+const bikeModel = require("../db/models/bike.model");
+const tuktukModel = require("../db/models/tuktuk.model");
 
-// car search in the database from the user input
-app.get('/getcarbyplate/:licenseplate', async (req, res) => {
-  const getCarByPlate = await carModel.findOne(req.params.licensePlate);
+//search car by license plate
+app.get("/getcarbyplate/:licenseplate", async (req, res) => {
+  const licensePlate = req.params.licenseplate;
+  const getCarByPlate = await carModel.findOne({ licensePlate: licensePlate });
+
   try {
     res.send({
       userId: getCarByPlate.userId,
@@ -20,16 +23,16 @@ app.get('/getcarbyplate/:licenseplate', async (req, res) => {
       createdAt: getCarByPlate.createdAt,
     });
   } catch (err) {
-    // if (getCarByPlate.length === -1 ) {
-    //   res.status(500)
-    // }
     res.status(500).send(err);
   }
 });
 
-// bike search in the database from the user input
-app.get('/getbikebyplate/:licenseplate', async (req, res) => {
-  const getBikeByPlate = await bikeModel.findOne(req.params.licensePlate);
+//search bike by license plate
+app.get("/getbikebyplate/:licenseplate", async (req, res) => {
+  const licensePlate = req.params.licenseplate;
+  const getBikeByPlate = await bikeModel.findOne({
+    licensePlate: licensePlate,
+  });
   try {
     res.send({
       userId: getBikeByPlate.userId,
@@ -43,8 +46,30 @@ app.get('/getbikebyplate/:licenseplate', async (req, res) => {
       createdAt: getBikeByPlate.createdAt,
     });
   } catch (err) {
-    res.status(500).send;
+    res.status(500).send(err);
   }
 });
 
+//get tuktuk by license palte
+app.get("/gettuktukbyplate/:licenseplate", async (req, res) => {
+  const licensePlate = req.params.licenseplate;
+  const getTukTukByPlate = await tuktukModel.findOne({
+    licensePlate: licensePlate,
+  });
+  try {
+    res.send({
+      userId: getTukTukByPlate.userId,
+      contactNumber: getTukTukByPlate.contactNumber,
+      licensePlate: getTukTukByPlate.licensePlate,
+      brand: getTukTukByPlate.brand,
+      model: getTukTukByPlate.model,
+      engineNumber: getTukTukByPlate.engineNumber,
+      isActive: getTukTukByPlate.isActive,
+      imagePath: getTukTukByPlate.imagePath,
+      createdAt: getTukTukByPlate.createdAt,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 module.exports = app;

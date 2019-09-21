@@ -1,13 +1,15 @@
-const mongoose = require('mongoose'); // Erase if already required
-const moment = require('moment');
+const mongoose = require("mongoose"); // Erase if already required
+const moment = require("moment");
 
-const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema({
   userID: {
     type: Number,
     default: 0,
+    unique: true,
+    index: true,
   },
   fullName: {
     type: String,
@@ -56,7 +58,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Lost', 'Found', 'Admin'],
+    enum: ["Lost", "Found", "Admin"],
   },
   isActive: Boolean,
   createdAt: {
@@ -65,7 +67,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const UserModel = mongoose.model('User', userSchema, 'User');
+const UserModel = mongoose.model("User", userSchema, "User");
 
 // Export the model
 module.exports = UserModel;

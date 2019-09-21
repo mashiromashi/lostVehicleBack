@@ -1,15 +1,21 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
-const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the schema of the mongo model
 const tuktukSchema = new mongoose.Schema({
-  id: {
+  userId: {
     type: Number,
     required: true,
     unique: true,
     index: true,
+  },
+  postId: {
+    type: Number,
+    reuqire: true,
+    index: true,
+    unique: true,
   },
   contactNumber: {
     type: Number,
@@ -35,9 +41,16 @@ const tuktukSchema = new mongoose.Schema({
     type: String,
     default: DateTime,
   },
+  imagePath: {
+    type: String,
+  },
+  remark: String,
+  foundDate: {
+    type: String,
+  },
 });
 
-const tuktukModel = mongoose.model('Tuk Tuk', tuktukSchema, ' Tuk Tuk');
+const tuktukModel = mongoose.model("Tuk Tuk", tuktukSchema, " Tuk Tuk");
 
 // Export the model
 module.exports = tuktukModel;
