@@ -5,7 +5,7 @@ const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema({
-  userID: {
+  userId: {
     type: Number,
     default: 0,
     unique: true,

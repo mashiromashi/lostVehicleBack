@@ -19,6 +19,8 @@ const carSchema = new mongoose.Schema({
   contactNumber: {
     type: Number,
     required: true,
+    text: true,
+    index: true,
   },
   licensePlate: {
     type: String,
@@ -28,10 +30,14 @@ const carSchema = new mongoose.Schema({
   brand: {
     type: String,
     required: true,
+    index: true,
+    text: true,
   },
   model: {
     type: String,
     required: true,
+    text: true,
+    index: true,
   },
   manfacturedYear: Number,
   engineNumber: String,

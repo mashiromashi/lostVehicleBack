@@ -5,7 +5,7 @@ const carModel = require("../db/models/car.model");
 const bikeModel = require("../db/models/bike.model");
 const tuktukModel = require("../db/models/tuktuk.model");
 
-//search car by license plate
+//filter car by license plate
 app.get("/getcarbyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getCarByPlate = await carModel.findOne({ licensePlate: licensePlate });
@@ -27,7 +27,7 @@ app.get("/getcarbyplate/:licenseplate", async (req, res) => {
   }
 });
 
-//search bike by license plate
+//filter bike by license plate
 app.get("/getbikebyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getBikeByPlate = await bikeModel.findOne({
@@ -50,7 +50,7 @@ app.get("/getbikebyplate/:licenseplate", async (req, res) => {
   }
 });
 
-//get tuktuk by license palte
+//filter tuktuk by license palte
 app.get("/gettuktukbyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getTukTukByPlate = await tuktukModel.findOne({
@@ -72,4 +72,5 @@ app.get("/gettuktukbyplate/:licenseplate", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 module.exports = app;

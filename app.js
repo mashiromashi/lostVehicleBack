@@ -39,7 +39,7 @@ const bikeRouter = require("./routes/bike.route");
 const laptopRouter = require("./routes/laptop.route");
 const phoneRouter = require("./routes/phone.route");
 const tuktukRouter = require("./routes/tuktuk.route");
-const searchRouter = require("./routes/search.route");
+const filterRouter = require("./routes/filter.route");
 const imageUploadRouter = require("./routes/imageUpload.route");
 
 app.use("/", indexRouter);
@@ -49,7 +49,7 @@ app.use("/bike", bikeRouter);
 app.use("/laptop", laptopRouter);
 app.use("/phone", phoneRouter);
 app.use("/tuktuk", tuktukRouter);
-app.use("/search", searchRouter);
+app.use("/filter", filterRouter);
 app.use("/imageupload", imageUploadRouter);
 
 // catch 404 and forward to error handler

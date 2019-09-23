@@ -23,14 +23,19 @@ const bikeSchema = new mongoose.Schema({
   licensePlate: {
     type: String,
     required: true,
+    unique: true,
   },
   brand: {
     type: String,
     required: true,
+    index: true,
+    text: true,
   },
   model: {
     type: String,
     required: true,
+    index: true,
+    text: true,
   },
   manufacturedYear: Number,
   engineNumber: String,

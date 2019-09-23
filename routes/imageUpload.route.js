@@ -2,16 +2,16 @@ const express = require("express");
 const multer = require("multer");
 const app = express();
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "public/images");
+    cb(null, `public/images/${req.body.licensePlate}`);
   },
   filename: function(req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname} `);
   },
 });
 
-let upload = multer({ storage: storage }).array("file");
+const upload = multer({ storage: storage }).array("file");
 
 app.post("/upload", function(req, res) {
   upload(req, res, function(err) {
