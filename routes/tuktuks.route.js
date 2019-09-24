@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const TukTukModel = require("../db/models/tuktuk.model");
+const TukTukModel = require('../db/models/tuktuks.model');
 
 // Get all the lost tuk tuks in the databased
-app.get("/", async (req, res, next) => {
+app.get('/', async (req, res, next) => {
   const getAllTukTuks = await TukTukModel.find({});
   try {
     res.send(getAllTukTuks);
@@ -13,7 +13,7 @@ app.get("/", async (req, res, next) => {
 });
 
 // Adding the lost tuktuk into the database
-app.post("/", async (req, res, next) => {
+app.post('/', async (req, res, next) => {
   const addTukTuk = new TukTukModel(req.body);
   try {
     await TukTukModel.save();
@@ -24,7 +24,7 @@ app.post("/", async (req, res, next) => {
 });
 
 // Updating the lost bike if found
-app.put("/update", async (req, res) => {
+app.put('/', async (req, res) => {
   const filter = { postID: req.body.postID };
   const update = { isActive: req.body.isActive };
   const updateTukTuk = await TukTukModel.findOneAndUpdate(filter, update, {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Shar Phway Api'});
+  res.render('index', { title: 'Shar Phway Api' });
 });
 
 module.exports = router;

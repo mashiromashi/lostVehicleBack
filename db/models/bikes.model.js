@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
-const moment = require("moment");
+const mongoose = require('mongoose');
+const moment = require('moment');
 
-const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
+const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
 
-// Declare the Schema of The Mongo model
-const carSchema = new mongoose.Schema({
+// Declare the schema of the mongo model
+const bikeSchema = new mongoose.Schema({
   userId: {
     type: Number,
     required: true,
     index: true,
   },
-  postID: {
+  postId: {
     type: Number,
     required: true,
     index: true,
@@ -19,13 +19,11 @@ const carSchema = new mongoose.Schema({
   contactNumber: {
     type: Number,
     required: true,
-    text: true,
-    index: true,
   },
   licensePlate: {
     type: String,
-    unique: true,
     required: true,
+    unique: true,
   },
   brand: {
     type: String,
@@ -36,22 +34,15 @@ const carSchema = new mongoose.Schema({
   model: {
     type: String,
     required: true,
-    text: true,
     index: true,
+    text: true,
   },
-  manfacturedYear: Number,
+  manufacturedYear: Number,
   engineNumber: String,
   isActive: Boolean,
   createdAt: {
     type: String,
     default: DateTime,
-  },
-  modifiedAt: {
-    type: String,
-    default: DateTime,
-  },
-  modifiedBy: {
-    type: String,
   },
   imagePath: String,
   remark: String,
@@ -60,7 +51,7 @@ const carSchema = new mongoose.Schema({
   },
 });
 
-const carModel = mongoose.model("Car", carSchema, "Car");
+const bikeModel = mongoose.model('Bike', bikeSchema, 'Bike');
 
 // Export the model
-module.exports = carModel;
+module.exports = bikeModel;

@@ -1,5 +1,5 @@
-const express = require("express");
-const multer = require("multer");
+const express = require('express');
+const multer = require('multer');
 const app = express();
 
 const storage = multer.diskStorage({
@@ -11,9 +11,9 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).array("file");
+const upload = multer({ storage: storage }).array('file');
 
-app.post("/upload", function(req, res) {
+app.post('/upload', function(req, res) {
   upload(req, res, function(err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);

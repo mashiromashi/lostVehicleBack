@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const BikeModel = require("../db/models/bike.model");
+const BikeModel = require('../db/models/bikes.model');
 
 // get all bike list for the admin
-app.get("/", async (req, res, next) => {
-  const getAllBike = await BikeModel.find({});
+app.get('/', async (req, res, next) => {
+  const getAllBike = await BikeModel.find({}).limit(20);
   try {
     if (getAllBike) {
       send(getAllBike);
@@ -15,7 +15,7 @@ app.get("/", async (req, res, next) => {
 });
 
 // Adding the lost bike into the database
-app.post("/", async (req, res) => {
+app.post('/', async (req, res) => {
   const addBike = new BikeModel(req.body);
   try {
     await addBike.save();
@@ -26,7 +26,7 @@ app.post("/", async (req, res) => {
 });
 
 // update module the lost bike if found
-app.put("/update/:postId", async (req, res) => {
+app.put('/update/:postId', async (req, res) => {
   const filter = { postID: req.body.postId };
   const update = { isActive: req.body.isActive };
   const updateBike = await BikeModel.findOneAndUpdate(filter, update, {
