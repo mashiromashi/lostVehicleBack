@@ -32,25 +32,25 @@ app.post('/register', async (req, res) => {
 
 // User Login module
 app.post('/login', async (req, res) => {
-  UserModel.findOne({
-    email: req.body.email,
-    password: req.body.password,
-  }).exec(function(err, user) {
-    if (err) callback(err);
-    else if (!user) {
-      res.status(404).send('User not found');
-    }
-    bcrypt.compare(UserModel.password, req.body.password, function(
-      err,
-      isMatch,
-    ) {
-      if (isMatch === true) {
-        return null, user;
-      } else {
-        return err;
+  const { email, password } = req.body;
+  const loginUser = await UserModel.findOne(
+    {
+      email: email,
+    },
+    (err, user) => {
+      if (err) throw err;
+      if (user) {
+        user.comparePassword(password, (err, match) => {
+          if (match && !err) {
+            res.status(200).send({
+              isActive: loginUser.isActive,
+              role: loginUser.role,
+            });
+          }
+        });
       }
-    });
-  });
+    },
+  );
 });
 
 // User update module for Admin
