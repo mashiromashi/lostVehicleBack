@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const UserModel = require('../db/models/users.model');
-const bcrypt = require('bcrypt');
 
 // Get all user list for admin
 app.get('/getall', async (req, res, next) => {

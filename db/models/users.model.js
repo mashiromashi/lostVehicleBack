@@ -47,10 +47,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
   },
-  lostItem: {
-    type: String,
-    index: true,
-  },
   lostDate: {
     type: String,
   },
@@ -89,11 +85,10 @@ userSchema.pre('save', function(next) {
   });
 });
 
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
+userSchema.methods.comparePassword = function(password, callback) {
+  bcrypt.compare(password, this.password, (err, isMatch) =>
+    callback(err, isMatch),
+  );
 };
 
 const UserModel = mongoose.model('Users', userSchema, 'Users');

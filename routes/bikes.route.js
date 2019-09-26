@@ -5,12 +5,12 @@ const BikeModel = require('../db/models/bikes.model');
 // get all bike list for the admin
 app.get('/', async (req, res, next) => {
   const getAllBike = await BikeModel.find({}).limit(20);
-  try {
-    if (getAllBike) {
-      send(getAllBike);
+  if (getAllBike) {
+    try {
+      res.status(200).send(getAllBike);
+    } catch (err) {
+      res.status(500).send(err);
     }
-  } catch (err) {
-    res.status(500).send(err);
   }
 });
 

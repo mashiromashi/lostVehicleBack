@@ -4,9 +4,9 @@ const TukTukModel = require('../db/models/tuktuks.model');
 
 // Get all the lost tuk tuks in the databased
 app.get('/', async (req, res, next) => {
-  const getAllTukTuks = await TukTukModel.find({});
+  const getAllTukTuks = await TukTukModel.find({}).limit(20);
   try {
-    res.send(getAllTukTuks);
+    res.status(200).send(getAllTukTuks);
   } catch (err) {
     res.status(500).send(err);
   }

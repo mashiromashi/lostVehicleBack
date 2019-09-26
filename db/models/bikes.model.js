@@ -5,11 +5,6 @@ const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
 
 // Declare the schema of the mongo model
 const bikeSchema = new mongoose.Schema({
-  userId: {
-    type: Number,
-    required: true,
-    index: true,
-  },
   postId: {
     type: Number,
     required: true,
@@ -49,9 +44,27 @@ const bikeSchema = new mongoose.Schema({
   foundDate: {
     type: String,
   },
+  lostDate: {
+    type: String,
+    required: true,
+  },
+  lostLocation: {
+    type: String,
+    required: true,
+    text: true,
+  },
+  lostName: {
+    type: String,
+    required: true,
+    text: true,
+  },
+  trash: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const bikeModel = mongoose.model('Bike', bikeSchema, 'Bike');
+const bikeModel = mongoose.model('Bike', bikeSchema, 'Bikes');
 
 // Export the model
 module.exports = bikeModel;

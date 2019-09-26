@@ -31,6 +31,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// // setup for images view
+// const publicTempDir = path.join(__dirname, 'images');
+// app.use('/images', express.static(publicTempDir));
+
 // Routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
@@ -50,7 +54,7 @@ app.use('/laptop', laptopRouter);
 app.use('/phone', phoneRouter);
 app.use('/tuktuks', tuktukRouter);
 app.use('/filter', filterRouter);
-app.use('/imageupload', imageUploadRouter);
+app.use('/image', imageUploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

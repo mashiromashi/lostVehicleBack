@@ -5,12 +5,7 @@ const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
 
 // Declare the Schema of The Mongo model
 const carSchema = new mongoose.Schema({
-  userId: {
-    type: Number,
-    required: true,
-    index: true,
-  },
-  postID: {
+  postId: {
     type: Number,
     required: true,
     index: true,
@@ -41,7 +36,10 @@ const carSchema = new mongoose.Schema({
   },
   manfacturedYear: Number,
   engineNumber: String,
-  isActive: Boolean,
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   createdAt: {
     type: String,
     default: DateTime,
@@ -58,9 +56,26 @@ const carSchema = new mongoose.Schema({
   foundDate: {
     type: String,
   },
+  lostDate: {
+    type: String,
+  },
+  lostLocation: {
+    type: String,
+    text: true,
+    required: true,
+  },
+  lostName: {
+    type: String,
+    text: true,
+    required: true,
+  },
+  trash: {
+    type: Boolean,
+    default: false,
+  }
 });
 
-const carModel = mongoose.model('Car', carSchema, 'Car');
+const carModel = mongoose.model('Car', carSchema, 'Cars');
 
 // Export the model
 module.exports = carModel;

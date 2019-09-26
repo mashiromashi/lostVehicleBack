@@ -5,12 +5,6 @@ const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
 
 // Declare the schema of the mongo model
 const tuktukSchema = new mongoose.Schema({
-  userId: {
-    type: Number,
-    required: true,
-    unique: true,
-    index: true,
-  },
   postId: {
     type: Number,
     reuqire: true,
@@ -25,6 +19,7 @@ const tuktukSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
+    lowercase: true,
   },
   brand: {
     type: String,
@@ -36,7 +31,10 @@ const tuktukSchema = new mongoose.Schema({
   },
   manufacturedYear: Number,
   engineNumber: String,
-  isActive: Boolean,
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   createdAt: {
     type: String,
     default: DateTime,
@@ -48,9 +46,19 @@ const tuktukSchema = new mongoose.Schema({
   foundDate: {
     type: String,
   },
+  lostDate: {
+    type: String,
+  },
+  lostLocation: {
+    type: String,
+  },
+  trash: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const tuktukModel = mongoose.model('Tuk Tuk', tuktukSchema, ' Tuk Tuk');
+const tuktukModel = mongoose.model('Tuk Tuk', tuktukSchema, 'Tuk Tuks');
 
 // Export the model
 module.exports = tuktukModel;

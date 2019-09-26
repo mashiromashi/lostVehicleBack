@@ -4,7 +4,7 @@ const CarModel = require('../db/models/cars.model');
 
 // Get all the lost cars in the database
 app.get('/', async (req, res, next) => {
-  const getAllCars = await CarModel.find({});
+  const getAllCars = await CarModel.find({}).limit(20);
   if (getAllCars) {
     try {
       res.send(getAllCars);
