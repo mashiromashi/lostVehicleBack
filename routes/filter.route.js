@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const carModel = require('../db/models/cars.model');
-const bikeModel = require('../db/models/bikes.model');
-const tuktukModel = require('../db/models/tuktuks.model');
+const carModel = require("../db/models/cars.model");
+const bikeModel = require("../db/models/bikes.model");
+const tuktukModel = require("../db/models/tuktuks.model");
 
 // filter car by license plate
-app.get('/getcarbyplate/:licenseplate', async (req, res) => {
+app.get("/getcarbyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getCarByPlate = await carModel.findOne({ licensePlate: licensePlate });
 
@@ -20,7 +20,7 @@ app.get('/getcarbyplate/:licenseplate', async (req, res) => {
       engineNumber: getCarByPlate.engineNumber,
       isActive: getCarByPlate.isActive,
       imagePath: getCarByPlate.imagePath,
-      createdAt: getCarByPlate.createdAt,
+      createdAt: getCarByPlate.createdAt
     });
   } catch (err) {
     res.status(500).send(err);
@@ -28,10 +28,10 @@ app.get('/getcarbyplate/:licenseplate', async (req, res) => {
 });
 
 // filter bike by license plate
-app.get('/getbikebyplate/:licenseplate', async (req, res) => {
+app.get("/getbikebyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getBikeByPlate = await bikeModel.findOne({
-    licensePlate: licensePlate,
+    licensePlate: licensePlate
   });
   try {
     res.send({
@@ -43,7 +43,7 @@ app.get('/getbikebyplate/:licenseplate', async (req, res) => {
       engineNumber: getBikeByPlate.engineNumber,
       isActive: getBikeByPlate.isActive,
       imagePath: getBikeByPlate.imagePath,
-      createdAt: getBikeByPlate.createdAt,
+      createdAt: getBikeByPlate.createdAt
     });
   } catch (err) {
     res.status(500).send(err);
@@ -51,10 +51,10 @@ app.get('/getbikebyplate/:licenseplate', async (req, res) => {
 });
 
 // filter tuktuk by license palte
-app.get('/gettuktukbyplate/:licenseplate', async (req, res) => {
+app.get("/gettuktukbyplate/:licenseplate", async (req, res) => {
   const licensePlate = req.params.licenseplate;
   const getTukTukByPlate = await tuktukModel.findOne({
-    licensePlate: licensePlate,
+    licensePlate: licensePlate
   });
   try {
     res.send({
@@ -66,7 +66,7 @@ app.get('/gettuktukbyplate/:licenseplate', async (req, res) => {
       engineNumber: getTukTukByPlate.engineNumber,
       isActive: getTukTukByPlate.isActive,
       imagePath: getTukTukByPlate.imagePath,
-      createdAt: getTukTukByPlate.createdAt,
+      createdAt: getTukTukByPlate.createdAt
     });
   } catch (err) {
     res.status(500).send(err);

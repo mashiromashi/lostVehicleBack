@@ -1,8 +1,8 @@
-const express = require('express');
-const multer = require('multer');
+const express = require("express");
+const multer = require("multer");
 const app = express();
-const fs = require('fs');
-//const globalImagePath = require('../util/imagePath');
+const fs = require("fs");
+// const globalImagePath = require('../util/imagePath');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -10,12 +10,12 @@ const storage = multer.diskStorage({
   },
   filename: function(req, file, cb) {
     cb(null, `${req.body.licensePlate}+${Date.now()}-${file.originalname}`);
-  },
+  }
 });
 
-const upload = multer({ storage: storage }).array('file');
+const upload = multer({ storage: storage }).array("file");
 
-app.post('/upload', function(req, res) {
+app.post("/upload", function(req, res) {
   upload(req, res, function(err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);
@@ -26,23 +26,23 @@ app.post('/upload', function(req, res) {
   });
 });
 
-app.get('/getallimages', function(req, res) {
-  fs.readdir('public/images', (err, files) => {
+app.get("/getallimages", function(req, res) {
+  fs.readdir("public/images", (err, files) => {
     try {
       console.log(files);
       res.status(200).send(files);
-    } catch {
+    } catch (err) {
       res.status(500).send(err);
     }
   });
 });
 
-app.get('/getimage/:licenseplate', function(req, res) {
-  fs.readdir('public/images', (err, file) => {
+app.get("/getimage/:licenseplate", function(req, res) {
+  fs.readdir("public/images", (err, file) => {
     try {
       console.log(file);
       res.status(200).send(file);
-    } catch {
+    } catch (err) {
       res.status(500).send(err);
     }
   });

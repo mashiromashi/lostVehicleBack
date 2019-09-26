@@ -6,14 +6,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 const app = express();
 
+dotenv.config();
 // mongoose connect
-mongoose.connect(
-  'mongodb+srv://admin:admin@cluster0-iz4np.gcp.mongodb.net/LostAndFound?retryWrites=true&w=majority',
-  { useNewUrlParser: true, useUnifiedTopology: true },
-);
+mongoose.connect(process.env.DB_CONNECT, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error'));
 db.once('open', function() {
@@ -30,10 +32,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// // setup for images view
-// const publicTempDir = path.join(__dirname, 'images');
-// app.use('/images', express.static(publicTempDir));
 
 // Routes
 const indexRouter = require('./routes/index');

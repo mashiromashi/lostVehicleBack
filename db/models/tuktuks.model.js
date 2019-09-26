@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
-const DateTime = moment(new Date()).format('DD-MMM-YYYY_hh:mm:ss');
+const DateTime = moment(new Date()).format("DD-MMM-YYYY_hh:mm:ss");
 
 // Declare the schema of the mongo model
 const tuktukSchema = new mongoose.Schema({
@@ -9,56 +9,56 @@ const tuktukSchema = new mongoose.Schema({
     type: Number,
     reuqire: true,
     index: true,
-    unique: true,
+    unique: true
   },
   contactNumber: {
     type: Number,
-    required: true,
+    required: true
   },
   licensePlate: {
     type: String,
     unique: true,
     required: true,
-    lowercase: true,
+    lowercase: true
   },
   brand: {
     type: String,
-    required: true,
+    required: true
   },
   model: {
     type: String,
-    required: true,
+    required: true
   },
   manufacturedYear: Number,
   engineNumber: String,
   isActive: {
     type: Boolean,
-    default: true,
+    default: true
   },
   createdAt: {
     type: String,
-    default: DateTime,
+    default: DateTime
   },
   imagePath: {
-    type: String,
+    type: String
   },
   remark: String,
   foundDate: {
-    type: String,
+    type: String
   },
   lostDate: {
-    type: String,
+    type: String
   },
   lostLocation: {
-    type: String,
+    type: String
   },
   trash: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 });
 
-const tuktukModel = mongoose.model('Tuk Tuk', tuktukSchema, 'Tuk Tuks');
+const tuktukModel = mongoose.model("Tuk Tuk", tuktukSchema, "Tuk Tuks");
 
 // Export the model
 module.exports = tuktukModel;

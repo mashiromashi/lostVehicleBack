@@ -4,7 +4,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['google'],
+  extends: ['google', 'prettier'],
+  plugins: ['prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -14,5 +15,6 @@ module.exports = {
   },
   rules: {
     'arrow-body-style': ['error', 'as-needed'],
+    'prettier/prettier': ['error'],
   },
 };

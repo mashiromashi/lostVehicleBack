@@ -1,6 +1,4 @@
-/* eslint-disable require-jsdoc */
-#!/usr/bin/env node
-
+// #!/usr/bin/env node
 /**
  * Module dependencies.
  */
