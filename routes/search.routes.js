@@ -6,8 +6,8 @@ const bikeModel = require("../db/models/bikes.model");
 const tuktukModel = require("../db/models/tuktuks.model");
 
 // search car by brand and model
-app.get("/getcarbybrandmodel/q=:/input", async (req, res) => {
-  const input = req.params.userInput;
+app.get("/getcarbybrandmodel/q=:input", async (req, res) => {
+  const input = req.params.input;
   const getCarByBrandModel = await carModel.find({
     $text: {
       $search: input
@@ -21,3 +21,5 @@ app.get("/getcarbybrandmodel/q=:/input", async (req, res) => {
     }
   }
 });
+
+module.exports = app;
