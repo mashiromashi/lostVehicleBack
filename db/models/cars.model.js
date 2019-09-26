@@ -13,9 +13,7 @@ const carSchema = new mongoose.Schema({
   },
   contactNumber: {
     type: Number,
-    required: true,
-    text: true,
-    index: true
+    required: true
   },
   licensePlate: {
     type: String,
@@ -31,8 +29,8 @@ const carSchema = new mongoose.Schema({
   model: {
     type: String,
     required: true,
-    text: true,
-    index: true
+    index: true,
+    text: true
   },
   manfacturedYear: Number,
   engineNumber: String,
@@ -75,6 +73,25 @@ const carSchema = new mongoose.Schema({
   }
 });
 
+// create text index for full text search
+carSchema.index(
+  { brand: "text", model: "text" },
+  {
+    weights: {
+      model: 5,
+      brand: 1
+    }
+  }
+);
+
+// to ensure that the indexes are created
+carSchema.on("index", function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Car Complete");
+  }
+});
 const carModel = mongoose.model("Car", carSchema, "Cars");
 
 // Export the model

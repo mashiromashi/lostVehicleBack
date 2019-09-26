@@ -39,6 +39,10 @@ const tuktukSchema = new mongoose.Schema({
     type: String,
     default: DateTime
   },
+  modifiedAt: {
+    type: String,
+    default: DateTime
+  },
   imagePath: {
     type: String
   },
@@ -58,6 +62,25 @@ const tuktukSchema = new mongoose.Schema({
   }
 });
 
+// create text index for full text search
+tuktukSchema.index(
+  { brand: "text", model: "text" },
+  {
+    weights: {
+      model: 5,
+      brand: 1
+    }
+  }
+);
+
+// to ensure that the indexes are created
+tuktukSchema.on("index", function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("tuk tuk Complete");
+  }
+});
 const tuktukModel = mongoose.model("Tuk Tuk", tuktukSchema, "Tuk Tuks");
 
 // Export the model

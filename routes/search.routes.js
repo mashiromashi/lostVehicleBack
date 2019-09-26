@@ -22,4 +22,37 @@ app.get("/getcarbybrandmodel/q=:input", async (req, res) => {
   }
 });
 
+// search bike by brand and model
+app.get("/getbikebybrandmodel/q=:input", async (req, res) => {
+  const input = req.params.input;
+  const getBikeByBrandModel = await bikeModel.find({
+    $text: {
+      $search: input
+    }
+  });
+  if (getBikeByBrandModel) {
+    try {
+      res.status(200).send(getBikeByBrandModel);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+});
+
+app.get("/gettuktukbybrandmodel/q=:input", async (req, res) => {
+  const input = req.params.input;
+  const getTukTukByBrandModel = await tuktukModel.find({
+    $text: {
+      $search: input
+    }
+  });
+  if (getTukTukByBrandModel) {
+    try {
+      res.status(200).send(getTukTukByBrandModel);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+});
+
 module.exports = app;

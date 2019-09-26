@@ -26,8 +26,8 @@ app.post("/", async (req, res) => {
 });
 
 // update module the lost bike if found
-app.put("/update/:postId", async (req, res) => {
-  const filter = { postID: req.body.postId };
+app.put("/:postId", async (req, res) => {
+  const filter = { postId: req.body.postId };
   const update = { isActive: req.body.isActive };
   const updateBike = await BikeModel.findOneAndUpdate(filter, update, {
     new: true

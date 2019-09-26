@@ -39,6 +39,10 @@ const bikeSchema = new mongoose.Schema({
     type: String,
     default: DateTime
   },
+  modifiedAt: {
+    type: String,
+    default: DateTime
+  },
   imagePath: String,
   remark: String,
   foundDate: {
@@ -61,6 +65,26 @@ const bikeSchema = new mongoose.Schema({
   trash: {
     type: Boolean,
     default: false
+  }
+});
+
+// create text index for full text search
+bikeSchema.index(
+  { brand: "text", model: "text" },
+  {
+    weights: {
+      model: 5,
+      brand: 1
+    }
+  }
+);
+
+// to ensure that the indexes are created
+bikeSchema.on("index", function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Bike Complete");
   }
 });
 

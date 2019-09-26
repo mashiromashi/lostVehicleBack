@@ -19,7 +19,7 @@ app.post("/", async (req, res, next) => {
   const addCar = new CarModel(req.body);
   try {
     await addCar.save();
-    res.send(addCar);
+    res.status(201).send(addCar);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -27,7 +27,7 @@ app.post("/", async (req, res, next) => {
 
 // Update module for the lost car if found
 app.put("/:postId", async (req, res) => {
-  const filter = { postID: req.params.postId };
+  const filter = { postId: req.params.postId };
   const update = { isActive: req.body.isActive };
   const updateCar = await CarModel.findOneAndUpdate(filter, update, {
     new: true

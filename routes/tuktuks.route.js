@@ -16,7 +16,7 @@ app.get("/", async (req, res, next) => {
 app.post("/", async (req, res, next) => {
   const addTukTuk = new TukTukModel(req.body);
   try {
-    await TukTukModel.save();
+    await addTukTuk.save();
     res.status(201).send(addTukTuk);
   } catch (err) {
     res.status(500).send(err);
@@ -25,7 +25,7 @@ app.post("/", async (req, res, next) => {
 
 // Updating the lost bike if found
 app.put("/:postId", async (req, res) => {
-  const filter = { postID: req.body.postId };
+  const filter = { postId: req.params.postId };
   const update = { isActive: req.body.isActive };
   const updateTukTuk = await TukTukModel.findOneAndUpdate(filter, update, {
     new: true
