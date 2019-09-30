@@ -22,15 +22,11 @@ const carSchema = new mongoose.Schema({
   },
   brand: {
     type: String,
-    required: true,
-    index: true,
-    text: true
+    required: true
   },
   model: {
     type: String,
-    required: true,
-    index: true,
-    text: true
+    required: true
   },
   manfacturedYear: Number,
   engineNumber: String,
@@ -59,12 +55,10 @@ const carSchema = new mongoose.Schema({
   },
   lostLocation: {
     type: String,
-    text: true,
     required: true
   },
   lostName: {
     type: String,
-    text: true,
     required: true
   },
   trash: {

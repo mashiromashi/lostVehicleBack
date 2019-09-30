@@ -56,6 +56,9 @@ const tuktukSchema = new mongoose.Schema({
   lostLocation: {
     type: String
   },
+  lostName: {
+    type: String
+  },
   trash: {
     type: Boolean,
     default: false
